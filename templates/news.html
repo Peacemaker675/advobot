@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Top News About {{court}}</h2>
+
+    {% if news_articles %}
+        <div class="row justify-content-center">
+            {% for news in news_articles %}
+                <div class="col-md-8 mb-4">
+                    <div class="card shadow-sm" style="width: 100%; display: flex; flex-direction: row;">
+                        <img src="../static/Google_News_icon.png" class="card-img-left" alt="News Image" style="width: 100px; height: 100px;">
+                        <div class="card-body" style="width: 60%;">
+                            <h4 class="card-title"><a href="{{ news.link }}" target="_blank" class="text-decoration-none">{{ news.title }}</a></h4>
+                            <p class="card-text text-muted">{{ news.source }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No news found.</p>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

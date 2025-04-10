@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Welcome to Stick&Dot</h1>
+    <p>Manage your cases efficiently</p>
+    {% for case in cases %}
+    <div class="card mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Case Number: {{ case[1] }}</h5>
+            <form action="/delete_case/{{ case[0] }}" method="POST">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+  {% endfor %}  
+
+    <button class="btn btn-primary mb-5 mt-3" data-bs-toggle="modal" data-bs-target="#addCaseModal">Add Case</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addCaseModal" tabindex="-1" aria-labelledby="addCaseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCaseModalLabel">Add Case</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/add_case">
+          <div class="mb-3">
+            <label for="caseId" class="form-label">Case Number</label>
+            <input type="text" class="form-control" id="caseId" name="case_id" placeholder="eg : WP(C)/4558/2023" required>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
