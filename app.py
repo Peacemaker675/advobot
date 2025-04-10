@@ -71,7 +71,8 @@ def register():
                 curr.execute("SELECT * FROM lawyers WHERE email = %s",(email,))
                 rows = curr.fetchall()
                 if len(rows) == 1 :
-                    return "EMAIL IN USE"
+                    flash("Email already in use","warning")
+                    return render_template("register.html",court_names = court_names)
                 curr.execute("SELECT court_id FROM courts WHERE court_name = %s", (request.form.get("court"),))
                 court = curr.fetchone()[0]
                 password = generate_password_hash(request.form.get("password"))
